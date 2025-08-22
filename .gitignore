@@ -1,5 +1,7 @@
 # Credential files - should never be committed
 *.json
+*.toml
+creds/
 
 # Environment configuration
 .env

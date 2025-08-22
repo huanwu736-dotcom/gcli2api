@@ -1,5 +1,17 @@
-pkg install rust build-essential python git ninja clang cmake
-git clone https://github.com/su-kaka/gcli2api.git
-cd ./gcli2api
-pip install -r requirements.txt --break-system-packages
-python web.py
+apt update && apt upgrade -y
+apt install git -y
+curl -Ls https://astral.sh/uv/install.sh | sh
+source $HOME/.local/bin/env.sh
+if [ -f "./web.py" ]; then
+    # Already in target directory; skip clone and cd
+    :
+elif [ -f "./gcli2api/web.py" ]; then
+    cd ./gcli2api
+else
+    git clone https://github.com/su-kaka/gcli2api.git
+    cd ./gcli2api
+fi
+git pull
+uv sync
+source .venv/bin/activate
+python3 web.py
